@@ -1,0 +1,39 @@
+<!-- Modal Crear Materia -->
+<div class="modal-overlay" id="modalCrearOverlay">
+    <div class="modal-content" id="modalCrearMateria">
+        <div class="modal-header">
+            <h5 class="modal-header-title">Crear Nueva Materia</h5>
+            <button type="button" class="modal-close-btn" onclick="ocultarModal('modalCrearOverlay')">×</button>
+        </div>
+        <form id="formCrearMateria">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Nombre de la Materia</label>
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        id="crearNombre" 
+                        name="nombre" 
+                        placeholder="Ej: Matemáticas"
+                        required
+                        minlength="3"
+                        maxlength="150">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Descripción</label>
+                    <textarea 
+                        class="form-control" 
+                        id="crearDescripcion" 
+                        name="descripcion" 
+                        placeholder="Descripción opcional..."
+                        maxlength="500"
+                        rows="4"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="ocultarModal('modalCrearOverlay')">Cancelar</button>
+                <button type="submit" class="btn btn-success" id="btnGuardarMateria">Crear Materia</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,90 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block titulo %}Gestión de Exámenes{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/evaluaciones/examenes.css' %}">
+<link rel="stylesheet" href="{% static 'css/evaluaciones/modals/crear.css' %}">
+<link rel="stylesheet" href="{% static 'css/evaluaciones/modals/ver.css' %}">
+<link rel="stylesheet" href="{% static 'css/evaluaciones/modals/editar.css' %}">
+<link rel="stylesheet" href="{% static 'css/evaluaciones/modals/eliminar.css' %}">
+<link rel="stylesheet" href="{% static 'css/evaluaciones/modals/preguntas.css' %}">
+{% endblock %}
+
+{% block contenido %}
+<div class="container-fluid py-4">
+    <!-- Encabezado -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h1>Gestión de Exámenes</h1>
+        </div>
+        <div class="col-md-6 text-end">
+            <button class="btn btn-primary" id="btnNuevoExamen">
+                <i class="fas fa-plus"></i> Nuevo Examen
+            </button>
+        </div>
+    </div>
+
+    <!-- Búsqueda y Filtros -->
+    <div class="filtros-container mb-3">
+        <input type="text" class="form-control" id="searchInput" placeholder="Buscar por título, descripción...">
+        <select class="form-select" id="filtroMateria">
+            <option value="">Todas las materias</option>
+        </select>
+        <select class="form-select" id="filtroTema">
+            <option value="">Todos los temas</option>
+        </select>
+        <select class="form-select" id="filtroTipo">
+            <option value="">Todos los tipos</option>
+            <option value="gratis">Gratis</option>
+            <option value="premium">Premium</option>
+        </select>
+        <select class="form-select" id="filtroEstado">
+            <option value="">Todos los estados</option>
+            <option value="activo">Activo</option>
+            <option value="inactivo">Inactivo</option>
+        </select>
+    </div>
+
+    <!-- Tabla de exámenes -->
+    <div class="card">
+        <div class="table-responsive">
+            <table class="table mb-0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>TÍTULO</th>
+                        <th>MATERIA</th>
+                        <th>TEMA</th>
+                        <th>TIPO</th>
+                        <th>DURACIÓN</th>
+                        <th>PREG</th>
+                        <th>ESTADO</th>
+                        <th>ACCIONES</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaExamenes">
+                    <!-- Se llena dinámicamente con JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modales -->
+{% include 'evaluaciones/modals/crear.html' %}
+{% include 'evaluaciones/modals/ver.html' %}
+{% include 'evaluaciones/modals/editar.html' %}
+{% include 'evaluaciones/modals/eliminar.html' %}
+{% include 'evaluaciones/modals/preguntas.html' %}
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/evaluaciones/examenes.js' %}"></script>
+<script src="{% static 'js/evaluaciones/modals/crear.js' %}"></script>
+<script src="{% static 'js/evaluaciones/modals/ver.js' %}"></script>
+<script src="{% static 'js/evaluaciones/modals/editar.js' %}"></script>
+<script src="{% static 'js/evaluaciones/modals/eliminar.js' %}"></script>
+<script src="{% static 'js/evaluaciones/modals/preguntas.js' %}"></script>
+{% endblock %}

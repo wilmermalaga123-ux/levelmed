@@ -1,0 +1,161 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block titulo %}Resolver Examen{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/evaluaciones/estudiante/resolver_examen.css' %}">
+{% endblock %}
+
+{% block contenido %}
+<div class="examen-container">
+    <!-- Historial de Intentos -->
+    <div class="intentos-historial" id="intentosHistorial" style="display: none;">
+        <h2><i class="fas fa-history"></i> Historial de Intentos</h2>
+        <div class="intentos-lista" id="intentosLista">
+            <!-- Se llena dinámicamente -->
+        </div>
+        <div class="intentos-info" id="intentosInfo">
+            <!-- Se llena dinámicamente -->
+        </div>
+    </div>
+
+    <!-- Header con información del examen -->
+    <header class="examen-header">
+        <div class="header-info">
+            <h1 id="examenTitulo">Cargando...</h1>
+            <p id="examenMateria" class="materia-nombre"></p>
+        </div>
+        <div class="header-controles">
+            <div class="timer" id="timer">
+                <i class="fas fa-clock"></i>
+                <span id="tiempoRestante">00:00</span>
+            </div>
+            <button class="btn-salir-examen" onclick="confirmarSalirExamen()">
+                <i class="fas fa-sign-out-alt"></i> Salir
+            </button>
+        </div>
+    </header>
+
+    <!-- Barra de progreso -->
+    <div class="progreso-container">
+        <div class="progreso-info">
+            <span>Progreso: <strong id="progresoTexto">0/0</strong></span>
+        </div>
+        <div class="progreso-barra">
+            <div class="progreso-fill" id="progresoFill"></div>
+        </div>
+    </div>
+
+    <!-- Contenedor de preguntas -->
+    <div class="preguntas-wrapper" id="preguntasWrapper">
+        <div class="loading-examen">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Cargando examen...</p>
+        </div>
+    </div>
+
+    <!-- Navegación entre preguntas -->
+    <div class="navegacion-preguntas" id="navegacionPreguntas" style="display: none;">
+        <button class="btn-nav btn-anterior" onclick="preguntaAnterior()" id="btnAnterior">
+            <i class="fas fa-chevron-left"></i> Anterior
+        </button>
+        <div class="indicadores-preguntas" id="indicadoresPreguntas">
+            <!-- Se llena dinámicamente -->
+        </div>
+        <button class="btn-nav btn-siguiente" onclick="manejarBotonSiguiente()" id="btnSiguiente">
+            Siguiente <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+</div>
+
+<!-- Modal de confirmación -->
+<div class="modal" id="modalConfirmar">
+    <div class="modal-contenido">
+        <h2>¿Finalizar Examen?</h2>
+        <p>¿Estás seguro de que deseas finalizar el examen? No podrás modificar tus respuestas después.</p>
+        <div class="modal-botones">
+            <button class="btn-cancelar" onclick="cerrarModalConfirmar()">Cancelar</button>
+            <button class="btn-confirmar" onclick="finalizarExamen()">Sí, Finalizar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de salir del examen -->
+<div class="modal" id="modalSalir">
+    <div class="modal-contenido modal-salir">
+        <div class="modal-header-icon">
+            <i class="fas fa-exclamation-triangle"></i>
+        </div>
+        <h2>¿Salir del Examen?</h2>
+        <p><strong>¡ATENCIÓN!</strong> Si sales ahora:</p>
+        <ul class="advertencias-salir">
+            <li><i class="fas fa-times-circle"></i> Se perderán todas tus respuestas</li>
+            <li><i class="fas fa-times-circle"></i> No se guardará tu avance</li>
+            <li><i class="fas fa-times-circle"></i> Este intento NO contará como realizado</li>
+            <li><i class="fas fa-times-circle"></i> El tiempo transcurrido se perderá</li>
+        </ul>
+        <div class="nota-recordatorio">
+            <i class="fas fa-info-circle"></i>
+            <p><strong>Nota:</strong> Si solo necesitas un descanso, puedes cerrar esta ventana o refrescar la página. Tu progreso se guardará automáticamente.</p>
+        </div>
+        <div class="modal-botones">
+            <button class="btn-cancelar" onclick="cerrarModalSalir()">
+                <i class="fas fa-arrow-left"></i> Continuar Examen
+            </button>
+            <button class="btn-salir-definitivo" onclick="salirExamen()">
+                <i class="fas fa-sign-out-alt"></i> Salir y Abandonar
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de preguntas sin contestar -->
+<div class="modal" id="modalPreguntasSinContestar">
+    <div class="modal-contenido modal-preguntas-sin-contestar">
+        <div class="modal-header-icon">
+            <i class="fas fa-exclamation-circle"></i>
+        </div>
+        <h2>Preguntas Sin Contestar</h2>
+        <p>Tienes <strong id="cantidadPreguntasSinContestar"></strong> pregunta(s) sin contestar.</p>
+        <p class="texto-secundario">¿Deseas finalizar de todas formas?</p>
+        <div class="modal-botones">
+            <button class="btn-cancelar" onclick="cerrarModalPreguntasSinContestar()">
+                Revisar
+            </button>
+            <button class="btn-confirmar" onclick="finalizarDesdePreguntasSinContestar()">
+                Finalizar de Todas Formas
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Contenedor de notificaciones toast -->
+<div id="toast-container"></div>
+
+<!-- Modal de resultados -->
+<div class="modal" id="modalResultados">
+    <div class="modal-contenido modal-resultados">
+        <div class="resultado-header">
+            <h2>Resultados del Examen</h2>
+        </div>
+        <div class="resultado-calificacion" id="resultadoCalificacion">
+            <!-- Se llena dinámicamente -->
+        </div>
+        <div class="resultado-detalles" id="resultadoDetalles">
+            <!-- Se llena dinámicamente -->
+        </div>
+        <div class="modal-botones">
+            <button class="btn-volver-examenes" onclick="window.location.href='/examenes/disponibles/'">
+                Volver a Exámenes
+            </button>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" id="examenId" value="{{ examen_id }}">
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/evaluaciones/estudiante/resolver_examen.js' %}"></script>
+{% endblock %}

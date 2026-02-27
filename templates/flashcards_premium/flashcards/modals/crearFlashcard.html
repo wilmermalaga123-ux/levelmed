@@ -1,0 +1,35 @@
+<!-- Modal Crear Flashcard -->
+<div class="modal-overlay" id="modalCrearFlashcardOverlay">
+    <div class="modal-content" id="modalCrearFlashcard">
+        <div class="modal-header">
+            <h5 class="modal-header-title">Crear Flashcard Premium</h5>
+            <button type="button" class="modal-close-btn" onclick="ocultarModal('modalCrearFlashcardOverlay')">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="formCrearFlashcard">
+                <div class="form-group">
+                    <label for="mazoFlashcard">Mazo</label>
+                    <select id="mazoFlashcard" name="mazo_id" required>
+                        <option value="">Seleccione un mazo</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="preguntaFlashcard">Pregunta</label>
+                    <textarea id="preguntaFlashcard" name="pregunta" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="respuestaFlashcard">Respuesta</label>
+                    <textarea id="respuestaFlashcard" name="respuesta" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="categoriaFlashcard">Categoría (opcional)</label>
+                    <input type="text" id="categoriaFlashcard" name="categoria">
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" onclick="ocultarModal('modalCrearFlashcardOverlay')">Cancelar</button>
+            <button type="button" class="btn btn-primary" id="btnGuardarFlashcard">Guardar</button>
+        </div>
+    </div>
+</div>

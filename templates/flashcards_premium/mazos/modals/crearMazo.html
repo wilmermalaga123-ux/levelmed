@@ -1,0 +1,37 @@
+<!-- Modal Crear Mazo -->
+<div class="modal-overlay" id="modalCrearMazoOverlay">
+    <div class="modal-content" id="modalCrearMazo">
+        <div class="modal-header">
+            <h5 class="modal-header-title">Crear Mazo Premium</h5>
+            <button type="button" class="modal-close-btn" onclick="ocultarModal('modalCrearMazoOverlay')">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="formCrearMazo">
+                <div class="form-group">
+                    <label for="nombreMazo">Nombre del Mazo</label>
+                    <input type="text" id="nombreMazo" name="nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="materiaMazo">Materia</label>
+                    <select id="materiaMazo" name="materia_id" onchange="cargarTemasCrearMazo()" required>
+                        <option value="">Seleccione una materia</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="temaMazo">Tema</label>
+                    <select id="temaMazo" name="tema_id" required>
+                        <option value="">Seleccione un tema</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="descripcionMazo">Descripción</label>
+                    <textarea id="descripcionMazo" name="descripcion" rows="3"></textarea>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" onclick="ocultarModal('modalCrearMazoOverlay')">Cancelar</button>
+            <button type="button" class="btn btn-primary" id="btnGuardarMazo">Guardar</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<!-- Modal Eliminar Mazo -->
+<div class="modal-overlay" id="modalEliminarMazoOverlay">
+    <div class="modal-content" id="modalEliminarMazo">
+        <div class="modal-header">
+            <h5 class="modal-header-title">Eliminar Mazo</h5>
+            <button type="button" class="modal-close-btn" onclick="cerrarModalMazo('modalEliminarMazoOverlay')">×</button>
+        </div>
+        <div class="modal-body">
+            <div class="warning-message">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>¿Estás seguro de que deseas eliminar el mazo <strong id="eliminar-mazo-nombre"></strong>?</p>
+                <p class="warning-text">Esta acción no se puede deshacer.</p>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" onclick="cerrarModalMazo('modalEliminarMazoOverlay')">Cancelar</button>
+            <button type="button" class="btn btn-danger" id="confirmar-eliminar-mazo">Eliminar</button>
+        </div>
+    </div>
+</div>

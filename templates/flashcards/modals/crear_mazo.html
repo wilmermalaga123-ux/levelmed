@@ -1,0 +1,27 @@
+<!-- Modal Crear Mazo -->
+<div class="modal-overlay" id="modalCrearMazoOverlay">
+    <div class="modal-content" id="modalCrearMazo">
+        <div class="modal-header">
+            <h5 class="modal-header-title">Crear Nuevo Mazo</h5>
+            <button type="button" class="modal-close-btn" onclick="cerrarModalMazo('modalCrearMazoOverlay')">×</button>
+        </div>
+        <form id="formCrearMazo">
+            {% csrf_token %}
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Nombre del mazo *</label>
+                    <input type="text" class="form-control" id="crear-mazo-nombre" name="nombre" placeholder="Nombre del mazo..." required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Descripción</label>
+                    <textarea class="form-control" id="crear-mazo-desc" name="descripcion" placeholder="Descripción (opcional)..." rows="3"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="cerrarModalMazo('modalCrearMazoOverlay')">Cancelar</button>
+                <button type="submit" class="btn btn-success">Crear Mazo</button>
+            </div>
+        </form>
+    </div>
+</div>

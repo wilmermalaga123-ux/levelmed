@@ -1,0 +1,36 @@
+<!-- Modal Editar Flashcard -->
+<div class="modal-overlay" id="modalEditarFlashcardOverlay">
+    <div class="modal-content" id="modalEditarFlashcard">
+        <div class="modal-header">
+            <h5 class="modal-header-title">Editar Flashcard</h5>
+            <button type="button" class="modal-close-btn" onclick="ocultarModal('modalEditarFlashcardOverlay')">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="formEditarFlashcard">
+                <input type="hidden" id="editFlashcardId">
+                <div class="form-group">
+                    <label for="editMazoFlashcard">Mazo</label>
+                    <select id="editMazoFlashcard" name="mazo_id" required>
+                        <option value="">Seleccione un mazo</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="editPreguntaFlashcard">Pregunta</label>
+                    <textarea id="editPreguntaFlashcard" name="pregunta" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="editRespuestaFlashcard">Respuesta</label>
+                    <textarea id="editRespuestaFlashcard" name="respuesta" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="editCategoriaFlashcard">Categoría (opcional)</label>
+                    <input type="text" id="editCategoriaFlashcard" name="categoria">
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" onclick="ocultarModal('modalEditarFlashcardOverlay')">Cancelar</button>
+            <button type="button" class="btn btn-primary" id="btnActualizarFlashcard">Actualizar</button>
+        </div>
+    </div>
+</div>

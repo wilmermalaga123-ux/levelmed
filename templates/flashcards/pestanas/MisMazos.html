@@ -1,0 +1,69 @@
+<div id="mis-mazos" class="tab-content">
+    <div class="mazos-section">
+        <!-- Encabezado -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <h3>Mis Mazos</h3>
+            </div>
+            <div class="col-md-6 text-end">
+                <button class="btn btn-primary" id="btn-abrir-crear-mazo">
+                    <i class="fas fa-folder-plus"></i> Crear Nuevo Mazo
+                </button>
+            </div>
+        </div>
+        
+        <!-- Tabla de mazos -->
+        <div class="card">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0" id="mazosTable">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>NOMBRE</th>
+                            <th>DESCRIPCIÓN</th>
+                            <th>TARJETAS</th>
+                            <th>VENCIDAS</th>
+                            <th>ACCIONES</th>
+                        </tr>
+                    </thead>
+                    <tbody id="mazosTableBody">
+                        {% if mazos %}
+                            {% for mazo in mazos %}
+                            <tr>
+                                <td>{{ mazo.nombre }}</td>
+                                <td>{{ mazo.descripcion|default:"-" }}</td>
+                                <td>
+                                    <span class="badge badge-tarjetas">
+                                        {{ mazo.contar_tarjetas }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="badge badge-vencidas">
+                                        {{ mazo.contar_vencidas }}
+                                    </span>
+                                </td>
+                                <td class="acciones-cell">
+                                    <div class="acciones-buttons">
+                                        <button class="btn-icon btn-estudiar" data-mazo-id="{{ mazo.id }}" title="Estudiar">
+                                            <i class="fas fa-book"></i>
+                                        </button>
+                                        <button class="btn-icon btn-editar-mazo" data-mazo-id="{{ mazo.id }}" title="Editar">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn-icon btn-eliminar-mazo" data-mazo-id="{{ mazo.id }}" data-mazo-nombre="{{ mazo.nombre }}" title="Eliminar">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="5" class="text-center">No tienes mazos creados todavía</td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

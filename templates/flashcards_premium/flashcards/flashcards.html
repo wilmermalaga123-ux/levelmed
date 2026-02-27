@@ -1,0 +1,80 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block titulo %}Gestión de Flashcards Premium{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/flashcards_premium/flashcards/flashcards.css' %}">
+<link rel="stylesheet" href="{% static 'css/flashcards_premium/flashcards/modals/crearFlashcard.css' %}">
+<link rel="stylesheet" href="{% static 'css/flashcards_premium/flashcards/modals/editarFlashcard.css' %}">
+<link rel="stylesheet" href="{% static 'css/flashcards_premium/flashcards/modals/verFlashcard.css' %}">
+<link rel="stylesheet" href="{% static 'css/flashcards_premium/flashcards/modals/eliminarFlashcard.css' %}">
+{% endblock %}
+
+{% block contenido %}
+<div class="container-fluid py-4">
+    <!-- Encabezado -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h1>Gestión de Flashcards Premium</h1>
+        </div>
+        <div class="col-md-6 text-end">
+            <button class="btn btn-primary" id="btnCrearFlashcard">
+                <i class="fas fa-plus"></i> Nueva Flashcard
+            </button>
+        </div>
+    </div>
+
+    <!-- Botón volver -->
+    <div class="row mb-3">
+        <div class="col-12">
+            <a href="{% url 'flashcards_premium:dashboard' %}" class="btn-volver">
+                <i class="fas fa-arrow-left"></i> Volver al Dashboard
+            </a>
+        </div>
+    </div>
+
+    <!-- Búsqueda -->
+    <div class="row mb-3">
+        <div class="col-12">
+            <input type="text" class="form-control" id="buscarFlashcard" placeholder="Buscar flashcard por pregunta...">
+        </div>
+    </div>
+
+    <!-- Tabla de flashcards -->
+    <div class="card">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0" id="tablaFlashcards">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>MAZO</th>
+                        <th>PREGUNTA</th>
+                        <th>RESPUESTA</th>
+                        <th>CATEGORÍA</th>
+                        <th>NIVEL</th>
+                        <th>ACCIONES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Se llena dinámicamente con JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modales -->
+{% include 'flashcards_premium/flashcards/modals/crearFlashcard.html' %}
+{% include 'flashcards_premium/flashcards/modals/editarFlashcard.html' %}
+{% include 'flashcards_premium/flashcards/modals/verFlashcard.html' %}
+{% include 'flashcards_premium/flashcards/modals/eliminarFlashcard.html' %}
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/flashcards_premium/flashcards/flashcards.js' %}"></script>
+<script src="{% static 'js/flashcards_premium/flashcards/modals/crearFlashcard.js' %}"></script>
+<script src="{% static 'js/flashcards_premium/flashcards/modals/editarFlashcard.js' %}"></script>
+<script src="{% static 'js/flashcards_premium/flashcards/modals/verFlashcard.js' %}"></script>
+<script src="{% static 'js/flashcards_premium/flashcards/modals/eliminarFlashcard.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,139 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block titulo %}Verificación de Pagos - LevelMed{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/suscripciones/admin/verificacion.css' %}">
+{% endblock %}
+
+{% block contenido %}
+<div class="verificacion-contenedor">
+    <div class="verificacion-header">
+        <h1>Verificación de Pagos</h1>
+        <p class="verificacion-subtitulo">Aprobar o rechazar solicitudes de suscripción</p>
+    </div>
+
+    <!-- Filtros -->
+    <div class="verificacion-filtros">
+        <button class="filtro-btn filtro-activo" data-estado="">
+            Todas
+        </button>
+        <button class="filtro-btn" data-estado="PENDIENTE">
+            Pendientes
+            <span class="badge" id="badgePendientes">0</span>
+        </button>
+        <button class="filtro-btn" data-estado="APROBADO">
+            Aprobadas
+        </button>
+        <button class="filtro-btn" data-estado="RECHAZADO">
+            Rechazadas
+        </button>
+        <button class="filtro-btn" data-estado="VENCIDO">
+            Vencidas
+        </button>
+    </div>
+
+    <!-- Lista de suscripciones -->
+    <div class="suscripciones-lista" id="listaSuscripciones">
+        <!-- Las tarjetas se cargan dinámicamente -->
+    </div>
+
+    <!-- Mensaje vacío -->
+    <div class="mensaje-vacio" id="mensajeVacio" style="display: none;">
+        <i>📋</i>
+        <p>No hay suscripciones para mostrar</p>
+    </div>
+
+    <!-- Spinner de carga -->
+    <div class="mensaje-carga" id="mensajeCarga" style="display: none;">
+        <div class="spinner-grande"></div>
+        <p>Cargando suscripciones...</p>
+    </div>
+</div>
+
+<!-- Modal de comprobante -->
+<div class="verificacion-modal" id="modalComprobante" style="display: none;">
+    <div class="verificacion-modal-contenido">
+        <div class="verificacion-modal-header">
+            <h2>📄 Comprobante de Pago</h2>
+            <button class="verificacion-modal-cerrar" id="cerrarModalComprobante">✕</button>
+        </div>
+        <div class="verificacion-modal-body">
+            <img id="imagenComprobante" src="" alt="Comprobante" style="width: 100%; max-height: 600px; object-fit: contain;">
+        </div>
+    </div>
+</div>
+
+<!-- Modal de confirmación de aprobación -->
+<div class="verificacion-modal" id="modalConfirmarAprobacion" style="display: none;">
+    <div class="verificacion-modal-contenido" style="max-width: 380px;">
+        <div class="verificacion-modal-header">
+            <h2>✓ Confirmar Aprobación</h2>
+            <button class="verificacion-modal-cerrar" id="cerrarModalConfirmarAprobacion">✕</button>
+        </div>
+        <div class="verificacion-modal-body">
+            <div style="text-align: center; padding: 0.5rem 0;">
+                <div style="font-size: 2.5rem; margin-bottom: 0.8rem; line-height: 1;">✓</div>
+                <p style="color: #333; font-size: 1rem; margin: 0 0 0.8rem 0; font-weight: 500;">
+                    ¿Aprobar esta <strong style="color: #10b981;">suscripción</strong>?
+                </p>
+                <p style="color: #999; font-size: 0.85rem; margin: 0;">
+                    El estudiante recibirá acceso inmediato
+                </p>
+            </div>
+        </div>
+        <div class="verificacion-modal-acciones">
+            <button type="button" class="btn-cancelar" id="cancelarAprobacion">
+                Cancelar
+            </button>
+            <button type="button" class="btn-aprobar-confirmar" id="confirmarAprobacion">
+                <span class="btn-texto">Aprobar</span>
+                <span class="btn-spinner" style="display: none;">
+                    <span class="spinner"></span>
+                </span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de rechazo -->
+<div class="verificacion-modal" id="modalRechazo" style="display: none;">
+    <div class="verificacion-modal-contenido">
+        <div class="verificacion-modal-header">
+            <h2>✕ Rechazar Suscripción</h2>
+            <button class="verificacion-modal-cerrar" id="cerrarModalRechazo">✕</button>
+        </div>
+        <div class="verificacion-modal-body">
+            <form id="formRechazo">
+                <input type="hidden" id="suscripcionRechazarId">
+                <div class="form-grupo">
+                    <label for="motivoRechazo">Motivo del Rechazo <span style="color: #ef4444;">*</span></label>
+                    <textarea 
+                        id="motivoRechazo" 
+                        rows="5" 
+                        placeholder="Explica de manera clara y detallada por qué se rechaza esta suscripción..."
+                        required
+                    ></textarea>
+                </div>
+                <div class="verificacion-modal-acciones">
+                    <button type="button" class="btn-cancelar" id="cancelarRechazo">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn-rechazar-confirmar">
+                        <span class="btn-texto">Rechazar Suscripción</span>
+                        <span class="btn-spinner" style="display: none;">
+                            <span class="spinner"></span>
+                            Rechazando...
+                        </span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/suscripciones/admin/verificacion.js' %}"></script>
+{% endblock %}

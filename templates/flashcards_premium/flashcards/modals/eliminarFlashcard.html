@@ -1,0 +1,24 @@
+<!-- Modal Eliminar Flashcard -->
+<div class="modal-overlay" id="modalEliminarFlashcardOverlay">
+    <div class="modal-content" id="modalEliminarFlashcard">
+        <div class="modal-header">
+            <h5 class="modal-header-title">Eliminar Flashcard</h5>
+            <button type="button" class="modal-close-btn" onclick="ocultarModal('modalEliminarFlashcardOverlay')">&times;</button>
+        </div>
+        <div class="modal-body">
+            <input type="hidden" id="deleteFlashcardId">
+            <div class="alerta-eliminar">
+                <p><strong>⚠️ Advertencia:</strong> Esta acción no se puede deshacer.</p>
+            </div>
+            <div class="info-flashcard">
+                <p><strong>Pregunta:</strong> <span id="deleteFlashcardPregunta"></span></p>
+                <p><strong>Respuesta:</strong> <span id="deleteFlashcardRespuesta"></span></p>
+            </div>
+            <p>¿Está seguro que desea eliminar esta flashcard?</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" onclick="ocultarModal('modalEliminarFlashcardOverlay')">Cancelar</button>
+            <button type="button" class="btn btn-danger" id="btnConfirmarEliminarFlashcard">Eliminar</button>
+        </div>
+    </div>
+</div>

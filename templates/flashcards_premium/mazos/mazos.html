@@ -1,0 +1,81 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block titulo %}Gestión de Mazos Premium{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/flashcards_premium/mazos/mazos.css' %}">
+<link rel="stylesheet" href="{% static 'css/flashcards_premium/mazos/modals/crearMazo.css' %}">
+<link rel="stylesheet" href="{% static 'css/flashcards_premium/mazos/modals/editarMazo.css' %}">
+<link rel="stylesheet" href="{% static 'css/flashcards_premium/mazos/modals/verMazo.css' %}">
+<link rel="stylesheet" href="{% static 'css/flashcards_premium/mazos/modals/eliminarMazo.css' %}">
+{% endblock %}
+
+{% block contenido %}
+<div class="container-fluid py-4">
+    <!-- Encabezado -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h1>Gestión de Mazos Premium</h1>
+        </div>
+        <div class="col-md-6 text-end">
+            <button class="btn btn-primary" id="btnCrearMazo">
+                <i class="fas fa-plus"></i> Nuevo Mazo
+            </button>
+        </div>
+    </div>
+
+    <!-- Botón volver -->
+    <div class="row mb-3">
+        <div class="col-12">
+            <a href="{% url 'flashcards_premium:dashboard' %}" class="btn-volver">
+                <i class="fas fa-arrow-left"></i> Volver al Dashboard
+            </a>
+        </div>
+    </div>
+
+    <!-- Búsqueda -->
+    <div class="row mb-3">
+        <div class="col-12">
+            <input type="text" class="form-control" id="buscarMazo" placeholder="Buscar mazo por nombre...">
+        </div>
+    </div>
+
+    <!-- Tabla de mazos -->
+    <div class="card">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0" id="tablaMazos">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>NOMBRE</th>
+                        <th>MATERIA</th>
+                        <th>TEMA</th>
+                        <th>DESCRIPCIÓN</th>
+                        <th>FLASHCARDS</th>
+                        <th>FECHA DE CREACIÓN</th>
+                        <th>ACCIONES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Se llena dinámicamente con JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modales -->
+{% include 'flashcards_premium/mazos/modals/crearMazo.html' %}
+{% include 'flashcards_premium/mazos/modals/editarMazo.html' %}
+{% include 'flashcards_premium/mazos/modals/verMazo.html' %}
+{% include 'flashcards_premium/mazos/modals/eliminarMazo.html' %}
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/flashcards_premium/mazos/mazos.js' %}"></script>
+<script src="{% static 'js/flashcards_premium/mazos/modals/crearMazo.js' %}"></script>
+<script src="{% static 'js/flashcards_premium/mazos/modals/editarMazo.js' %}"></script>
+<script src="{% static 'js/flashcards_premium/mazos/modals/verMazo.js' %}"></script>
+<script src="{% static 'js/flashcards_premium/mazos/modals/eliminarMazo.js' %}"></script>
+{% endblock %}

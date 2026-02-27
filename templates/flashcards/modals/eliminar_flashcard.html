@@ -1,0 +1,21 @@
+<!-- Modal Eliminar Flashcard -->
+<div class="modal-overlay" id="modalEliminarFlashcardOverlay">
+    <div class="modal-content" id="modalEliminarFlashcard">
+        <div class="modal-header">
+            <h5 class="modal-header-title">Eliminar Flashcard</h5>
+            <button type="button" class="modal-close-btn" onclick="cerrarModalMazo('modalEliminarFlashcardOverlay')">×</button>
+        </div>
+        <div class="modal-body">
+            <div class="warning-message">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>¿Estás seguro de que deseas eliminar esta flashcard?</p>
+                <p class="warning-text"><strong id="eliminar-flashcard-pregunta"></strong></p>
+                <p class="warning-text">Esta acción no se puede deshacer.</p>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" onclick="cerrarModalMazo('modalEliminarFlashcardOverlay')">Cancelar</button>
+            <button type="button" class="btn btn-danger" id="confirmar-eliminar-flashcard">Eliminar</button>
+        </div>
+    </div>
+</div>
